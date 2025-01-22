@@ -342,28 +342,100 @@ h1 {
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
+.btn {
+    background: linear-gradient(135deg, #ffd700, #ffed4a);
+    color: #000000;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, #ffed4a, #ffe97d);
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.btn:disabled {
+    background: linear-gradient(135deg, #cccccc, #dddddd);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
 .bet-btn {
-    padding: 0.5rem 1rem;
-    background: linear-gradient(45deg, #4a90e2, #357abd);
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff);
     color: white;
+    font-weight: 600;
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .bet-btn:hover {
-    background: linear-gradient(45deg, #357abd, #2868a5);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, #00d2ff, #3a7bd5);
 }
 
-.bet-btn.pulse {
-    animation: pulse 2s infinite;
+.bet-btn:active {
+    transform: translateY(1px);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .all-in {
-    background: linear-gradient(45deg, #ff4444, #cc0000);
-    font-weight: bold;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     animation: pulse-strong 2s infinite;
 }
 
 .all-in:hover {
-    background: linear-gradient(45deg, #cc0000, #990000);
+    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.reset-btn:hover {
+    background: linear-gradient(135deg, #38ef7d, #11998e);
 }
 
 .chip-count, .bet-amount {
@@ -453,21 +525,10 @@ h1 {
     margin-top: 0.8rem;
 }
 
-.btn {
-    background: linear-gradient(45deg, #ffd700, #ffed4a);
-    color: #000000;
-    font-weight: 600;
-    border-radius: 12px;
-    box-shadow: 
-        0 4px 6px rgba(0, 0, 0, 0.2),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-        0 6px 12px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.2);
-    background: linear-gradient(45deg, #ffed4a, #ffe97d);
+.btn:disabled {
+    background: linear-gradient(135deg, #cccccc, #dddddd);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
 } 
