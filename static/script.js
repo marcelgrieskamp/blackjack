@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listeners
     newGameBtn.addEventListener('click', startNewGame);
-    placeBetBtn.addEventListener('click', placeBet);
+    placeBetBtn.addEventListener('click', placeBetAction);
     hitBtn.addEventListener('click', hit);
     standBtn.addEventListener('click', stand);
     resetBtn.addEventListener('click', resetGame);
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         messageEl.textContent = '';
     }
 
-    function placeBet() {
+    function placeBetAction() {
         if (currentBet <= 0) {
             messageEl.textContent = 'Bitte setzen Sie einen Betrag!';
             messageEl.classList.add('pulse');
@@ -272,23 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentChips = parseInt(chipsElement.textContent);
         chipsElement.textContent = currentChips + amount;
         updateResetButtonVisibility();
-    }
-
-    function placeBet(amount) {
-        const chipsElement = document.getElementById('chips');
-        const currentBetElement = document.getElementById('current-bet');
-        const currentChips = parseInt(chipsElement.textContent);
-        const currentBet = parseInt(currentBetElement.textContent);
-
-        if (amount === 'all-in') {
-            amount = currentChips;
-        }
-
-        if (currentChips >= amount) {
-            chipsElement.textContent = currentChips - amount;
-            currentBetElement.textContent = currentBet + amount;
-            updateResetButtonVisibility();
-        }
     }
 
     // Füge den initialen Aufruf hinzu
