@@ -1,0 +1,447 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 15px #e60073, 0 0 20px #e60073; }
+    100% { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #e60073, 0 0 40px #e60073; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.05) translateY(-5px); }
+    100% { transform: scale(1) translateY(0); }
+}
+
+@keyframes pulse-strong {
+    0% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.1) translateY(-8px); box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); }
+    100% { transform: scale(1) translateY(0); }
+}
+
+@keyframes slide-in {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes shine {
+    0% { background-position: -100px; }
+    100% { background-position: 200px; }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1a472a 0%, #0a1f12 100%);
+    color: #ffffff;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    color: #ffd700;
+    margin-bottom: 2rem;
+    font-size: 3rem;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.game-area {
+    background: linear-gradient(to bottom, #2a5a3a, #1a472a);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    animation: fade-in 0.5s ease-out;
+}
+
+.dealer-area, .player-area {
+    margin-bottom: 2rem;
+    animation: slide-in 0.5s ease-out;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0;
+    min-height: 150px;
+    justify-content: center;
+}
+
+.card {
+    background: #ffffff;
+    width: 100px;
+    height: 140px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    animation: fade-in 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.5rem;
+    font-family: 'Times New Roman', serif;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card .value-top {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 1.2rem;
+}
+
+.card .value-bottom {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 1.2rem;
+    transform: rotate(180deg);
+}
+
+.card .suit {
+    font-size: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card.herz, .card.karo {
+    color: #ff0000;
+}
+
+.card.pik, .card.kreuz {
+    color: #000000;
+}
+
+.message {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    animation: fade-in 0.3s ease-out;
+}
+
+.betting-area {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.betting-area p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+#chips, #current-bet {
+    color: #ffd700;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.bet-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.chip {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.chip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: repeating-conic-gradient(
+        from 0deg,
+        rgba(255, 255, 255, 0.15) 0deg 20deg,
+        transparent 20deg 40deg
+    );
+}
+
+.chip::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+}
+
+.chip:hover {
+    transform: translateY(-5px) rotate(15deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.chip-inner {
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 1;
+}
+
+.chip[data-amount="10"] {
+    background: linear-gradient(145deg, #4a90e2, #357abd);
+    border: 8px solid #4a90e2;
+}
+
+.chip[data-amount="25"] {
+    background: linear-gradient(145deg, #50c878, #3aa15c);
+    border: 8px solid #50c878;
+}
+
+.chip[data-amount="50"] {
+    background: linear-gradient(145deg, #ffd700, #ccac00);
+    border: 8px solid #ffd700;
+}
+
+.chip[data-amount="100"] {
+    background: linear-gradient(145deg, #000000, #333333);
+    border: 8px solid #000000;
+}
+
+.chip[data-amount="200"] {
+    background: linear-gradient(145deg, #9932cc, #7b28a4);
+    border: 8px solid #9932cc;
+}
+
+.chip[data-amount="500"] {
+    background: linear-gradient(145deg, #ff4500, #cc3700);
+    border: 8px solid #ff4500;
+}
+
+.chip[data-amount="1000"] {
+    background: linear-gradient(145deg, #daa520, #b38600);
+    border: 8px solid #daa520;
+}
+
+.chip.all-in {
+    background: linear-gradient(145deg, #ff0000, #cc0000);
+    border: 8px solid #ff0000;
+    animation: pulse-strong 2s infinite;
+}
+
+/* Spezielle Effekte für die Chips */
+.chip::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border-radius: 50%;
+    background: repeating-conic-gradient(
+        from 0deg,
+        transparent 0deg 18deg,
+        rgba(255, 255, 255, 0.1) 20deg 38deg
+    );
+    z-index: -1;
+}
+
+.chip::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    background: repeating-conic-gradient(
+        from 0deg,
+        transparent 0deg 30deg,
+        rgba(255, 255, 255, 0.05) 32deg 60deg
+    );
+    z-index: -1;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    background: linear-gradient(45deg, #ffd700, #ffed4a);
+    color: #000000;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.bet-btn {
+    padding: 0.5rem 1rem;
+    background: linear-gradient(45deg, #4a90e2, #357abd);
+    color: white;
+}
+
+.bet-btn:hover {
+    background: linear-gradient(45deg, #357abd, #2868a5);
+}
+
+.bet-btn.pulse {
+    animation: pulse 2s infinite;
+}
+
+.all-in {
+    background: linear-gradient(45deg, #ff4444, #cc0000);
+    font-weight: bold;
+    animation: pulse-strong 2s infinite;
+}
+
+.all-in:hover {
+    background: linear-gradient(45deg, #cc0000, #990000);
+}
+
+.chip-count, .bet-amount {
+    display: inline-block;
+    animation: none;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .game-area {
+        padding: 1rem;
+    }
+    
+    .card {
+        width: 80px;
+        height: 112px;
+        font-size: 1.2rem;
+    }
+
+    .bet-controls {
+        gap: 0.5rem;
+    }
+
+    .chip {
+        width: 60px;
+        height: 60px;
+    }
+
+    .chip-inner {
+        font-size: 0.8rem;
+    }
+
+    .controls {
+        flex-wrap: wrap;
+    }
+}
+
+.card.hidden {
+    background: linear-gradient(45deg, #b00, #900);
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(0, 0, 0, 0.1) 10px,
+        rgba(0, 0, 0, 0.1) 20px
+    );
+}
+
+.card.hidden .value-top,
+.card.hidden .value-bottom,
+.card.hidden .suit {
+    display: none;
+}
+
+.card.hidden::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+} 
