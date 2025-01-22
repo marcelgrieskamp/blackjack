@@ -150,6 +150,9 @@ h1 {
         0 4px 8px rgba(0, 0, 0, 0.3),
         0 0 0 1px rgba(255, 255, 255, 0.1);
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .chip::before {
@@ -531,4 +534,69 @@ h1 {
     transform: none;
     box-shadow: none;
     opacity: 0.7;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn.action-btn {
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+    color: white;
+    font-weight: 600;
+    padding: 0.8rem 2rem;
+    border-radius: 16px;
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-size: 1.1rem;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn.action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+}
+
+.btn.action-btn:active {
+    transform: translateY(1px);
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn.new-game {
+    background: linear-gradient(135deg, #00b09b, #96c93d);
+}
+
+.btn.new-game:hover {
+    background: linear-gradient(135deg, #96c93d, #00b09b);
+}
+
+.btn.hit {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
+.btn.hit:hover {
+    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+}
+
+.btn.stand {
+    background: linear-gradient(135deg, #4776E6, #8E54E9);
+}
+
+.btn.stand:hover {
+    background: linear-gradient(135deg, #8E54E9, #4776E6);
 } 
