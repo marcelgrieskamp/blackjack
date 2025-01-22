@@ -348,84 +348,86 @@ h1 {
 .btn {
     background: linear-gradient(135deg, #FFD700, #FFC000);
     color: #000;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
     padding: 0.8rem 1.6rem;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    box-shadow: 
-        0 4px 12px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.05em;
 }
 
 .btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 
-        0 8px 16px rgba(0, 0, 0, 0.2),
-        0 0 0 1px rgba(255, 255, 255, 0.2);
-    background: linear-gradient(135deg, #FFE135, #FFD700);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn:active:not(:disabled) {
     transform: translateY(1px);
-    box-shadow: 
-        0 2px 8px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .btn:disabled {
-    background: linear-gradient(135deg, #E0E0E0, #CCCCCC);
-    color: #888888;
+    background: linear-gradient(135deg, #E8E8E8, #D1D1D1);
+    color: #000;
+    opacity: 0.7;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
-    opacity: 1;
 }
 
 .btn.action-btn {
     background: linear-gradient(135deg, #FFD700, #FFC000);
     color: #000;
-    font-weight: 600;
+    font-weight: 500;
     padding: 0.8rem 2rem;
     border-radius: 12px;
-    box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-size: 0.9rem;
-    backdrop-filter: blur(5px);
-    border: none;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
 }
 
 .btn.action-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    background: linear-gradient(135deg, #FFE135, #FFD700);
-    box-shadow: 
-        0 8px 16px rgba(0, 0, 0, 0.2),
-        0 0 0 1px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn.action-btn:active:not(:disabled) {
     transform: translateY(1px);
-    background: linear-gradient(135deg, #FFC000, #FFB000);
-    box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .btn.action-btn:disabled {
-    background: linear-gradient(135deg, #E0E0E0, #CCCCCC);
-    color: #888888;
+    background: linear-gradient(135deg, #E8E8E8, #D1D1D1);
+    color: #000;
+    opacity: 0.7;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
-    opacity: 1;
+}
+
+.btn.new-game,
+.btn.hit,
+.btn.stand,
+.btn.place-bet,
+.btn.reset-btn {
+    background: linear-gradient(135deg, #FFD700, #FFC000);
+    color: #000;
+}
+
+.btn.new-game:disabled,
+.btn.hit:disabled,
+.btn.stand:disabled,
+.btn.place-bet:disabled,
+.btn.reset-btn:disabled {
+    background: linear-gradient(135deg, #E8E8E8, #D1D1D1);
+    color: #000;
+    opacity: 0.7;
 }
 
 .bet-btn {
@@ -442,46 +444,6 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.btn.new-game {
-    background: rgba(0, 176, 155, 0.2);
-}
-
-.btn.new-game:hover {
-    background: rgba(0, 176, 155, 0.3);
-}
-
-.btn.hit {
-    background: rgba(255, 65, 108, 0.2);
-}
-
-.btn.hit:hover {
-    background: rgba(255, 65, 108, 0.3);
-}
-
-.btn.stand {
-    background: rgba(71, 118, 230, 0.2);
-}
-
-.btn.stand:hover {
-    background: rgba(71, 118, 230, 0.3);
-}
-
-.btn.place-bet {
-    background: rgba(58, 123, 213, 0.2);
-}
-
-.btn.place-bet:hover {
-    background: rgba(58, 123, 213, 0.3);
-}
-
-.btn.reset-btn {
-    background: rgba(17, 153, 142, 0.2);
-}
-
-.btn.reset-btn:hover {
-    background: rgba(17, 153, 142, 0.3);
 }
 
 .chip-count, .bet-amount {
