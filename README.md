@@ -12,7 +12,7 @@ Ein browser-basiertes Blackjack-Spiel, implementiert in Go und JavaScript.
 1. Klonen Sie das Repository:
 ```bash
 git clone https://github.com/marcelgrieskamp/blackjack.git
-cd blackjack-go
+cd blackjack
 ```
 
 2. Abhängigkeiten installieren:
