@@ -346,10 +346,10 @@ h1 {
 }
 
 .btn {
-    background: linear-gradient(135deg, #FFD700, #FFC000);
+    background: #FFD700;
     color: #000;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 0.875rem;
     padding: 0.8rem 1.6rem;
     border: none;
@@ -372,18 +372,17 @@ h1 {
 }
 
 .btn:disabled {
-    background: linear-gradient(135deg, #E8E8E8, #D1D1D1);
+    background: #D1D1D1;
     color: #000;
-    opacity: 0.7;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
 }
 
 .btn.action-btn {
-    background: linear-gradient(135deg, #FFD700, #FFC000);
+    background: #FFD700;
     color: #000;
-    font-weight: 500;
+    font-weight: 700;
     padding: 0.8rem 2rem;
     border-radius: 12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -403,9 +402,8 @@ h1 {
 }
 
 .btn.action-btn:disabled {
-    background: linear-gradient(135deg, #E8E8E8, #D1D1D1);
+    background: #D1D1D1;
     color: #000;
-    opacity: 0.7;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
@@ -416,7 +414,7 @@ h1 {
 .btn.stand,
 .btn.place-bet,
 .btn.reset-btn {
-    background: linear-gradient(135deg, #FFD700, #FFC000);
+    background: #FFD700;
     color: #000;
 }
 
@@ -425,9 +423,8 @@ h1 {
 .btn.stand:disabled,
 .btn.place-bet:disabled,
 .btn.reset-btn:disabled {
-    background: linear-gradient(135deg, #E8E8E8, #D1D1D1);
+    background: #D1D1D1;
     color: #000;
-    opacity: 0.7;
 }
 
 .bet-btn {
