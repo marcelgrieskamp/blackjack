@@ -180,46 +180,15 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.chip::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50%;
-    background: repeating-conic-gradient(
-        from 0deg,
-        rgba(255, 255, 255, 0.15) 0deg 20deg,
-        transparent 20deg 40deg
-    );
-}
-
-.chip::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    height: 90%;
-    border-radius: 50%;
-    border: 2px dashed rgba(255, 255, 255, 0.3);
-}
-
 .chip:hover {
-    transform: translateY(-5px) rotate(15deg);
+    transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 .chip-inner {
-    width: 70%;
-    height: 70%;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -227,54 +196,74 @@ h1 {
     font-size: 1rem;
     color: #ffffff;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.1);
-    z-index: 1;
+    position: relative;
+    z-index: 2;
 }
 
 .chip[data-amount="10"] {
-    background: linear-gradient(145deg, #4a90e2, #357abd);
-    border: 8px solid #4a90e2;
+    background: #4a90e2;
 }
 
 .chip[data-amount="25"] {
-    background: linear-gradient(145deg, #50c878, #3aa15c);
-    border: 8px solid #50c878;
+    background: #50c878;
 }
 
 .chip[data-amount="50"] {
-    background: linear-gradient(145deg, #ffd700, #ccac00);
-    border: 8px solid #ffd700;
+    background: #ffd700;
 }
 
 .chip[data-amount="100"] {
-    background: linear-gradient(145deg, #000000, #333333);
-    border: 8px solid #000000;
+    background: #000000;
 }
 
 .chip[data-amount="200"] {
-    background: linear-gradient(145deg, #9932cc, #7b28a4);
-    border: 8px solid #9932cc;
+    background: #9932cc;
 }
 
 .chip[data-amount="500"] {
-    background: linear-gradient(145deg, #ff4500, #cc3700);
-    border: 8px solid #ff4500;
+    background: #ff4500;
 }
 
 .chip[data-amount="1000"] {
-    background: linear-gradient(145deg, #daa520, #b38600);
-    border: 8px solid #daa520;
+    background: #daa520;
 }
 
 .chip.all-in {
-    background: linear-gradient(145deg, #ff0000, #cc0000);
-    border: 8px solid #ff0000;
+    background: #ff0000;
     animation: pulse-strong 2s infinite;
 }
 
-/* Spezielle Effekte für die Chips */
 .chip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: repeating-conic-gradient(
+        from 0deg,
+        transparent 0deg 30deg,
+        rgba(255, 255, 255, 0.1) 30deg 60deg
+    );
+    z-index: 1;
+}
+
+.chip::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 85%;
+    border-radius: 50%;
+    border: 4px dashed rgba(255, 255, 255, 0.3);
+    z-index: 1;
+}
+
+/* Äußerer Ring für jeden Chip */
+.chip .chip-inner::before {
     content: '';
     position: absolute;
     top: -8px;
@@ -282,27 +271,21 @@ h1 {
     right: -8px;
     bottom: -8px;
     border-radius: 50%;
-    background: repeating-conic-gradient(
-        from 0deg,
-        transparent 0deg 18deg,
-        rgba(255, 255, 255, 0.1) 20deg 38deg
-    );
+    border: 8px solid rgba(255, 255, 255, 0.2);
     z-index: -1;
 }
 
-.chip::after {
+/* Innerer Ring für jeden Chip */
+.chip .chip-inner::after {
     content: '';
     position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
     border-radius: 50%;
-    background: repeating-conic-gradient(
-        from 0deg,
-        transparent 0deg 30deg,
-        rgba(255, 255, 255, 0.05) 32deg 60deg
-    );
+    border: 2px solid rgba(255, 255, 255, 0.4);
     z-index: -1;
 }
 
