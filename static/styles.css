@@ -346,10 +346,11 @@ h1 {
 }
 
 .btn {
-    background: linear-gradient(135deg, #ffd700, #ffed4a);
-    color: #000000;
+    background: linear-gradient(135deg, #FFD700, #FFC000);
+    color: #000;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 0.8rem 1.6rem;
     border: none;
     border-radius: 12px;
@@ -359,18 +360,18 @@ h1 {
         0 0 0 1px rgba(255, 255, 255, 0.1);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
 }
 
-.btn:hover {
+.btn:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 
         0 8px 16px rgba(0, 0, 0, 0.2),
         0 0 0 1px rgba(255, 255, 255, 0.2);
-    background: linear-gradient(135deg, #ffed4a, #ffe97d);
+    background: linear-gradient(135deg, #FFE135, #FFD700);
 }
 
-.btn:active {
+.btn:active:not(:disabled) {
     transform: translateY(1px);
     box-shadow: 
         0 2px 8px rgba(0, 0, 0, 0.1),
@@ -378,11 +379,53 @@ h1 {
 }
 
 .btn:disabled {
-    background: linear-gradient(135deg, #cccccc, #dddddd);
+    background: linear-gradient(135deg, #E0E0E0, #CCCCCC);
+    color: #888888;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
-    opacity: 0.7;
+    opacity: 1;
+}
+
+.btn.action-btn {
+    background: linear-gradient(135deg, #FFD700, #FFC000);
+    color: #000;
+    font-weight: 600;
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.9rem;
+    backdrop-filter: blur(5px);
+    border: none;
+}
+
+.btn.action-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #FFE135, #FFD700);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.btn.action-btn:active:not(:disabled) {
+    transform: translateY(1px);
+    background: linear-gradient(135deg, #FFC000, #FFB000);
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.btn.action-btn:disabled {
+    background: linear-gradient(135deg, #E0E0E0, #CCCCCC);
+    color: #888888;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 1;
 }
 
 .bet-btn {
@@ -399,39 +442,6 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.btn.action-btn {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-weight: 600;
-    padding: 0.8rem 2rem;
-    border-radius: 12px;
-    box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-size: 1.1rem;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn.action-btn:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 
-        0 8px 16px rgba(0, 0, 0, 0.2),
-        0 0 0 1px rgba(255, 255, 255, 0.3);
-}
-
-.btn.action-btn:active {
-    transform: translateY(1px);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .btn.new-game {
@@ -561,52 +571,11 @@ h1 {
     margin-top: 0.8rem;
 }
 
-.btn:disabled {
-    background: linear-gradient(135deg, #cccccc, #dddddd);
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-    opacity: 0.7;
-}
-
 .game-controls {
     display: flex;
     justify-content: center;
     gap: 1rem;
     margin-top: 1.5rem;
-}
-
-.btn.action-btn {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-weight: 600;
-    padding: 0.8rem 2rem;
-    border-radius: 12px;
-    box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-size: 1.1rem;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn.action-btn:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 
-        0 8px 16px rgba(0, 0, 0, 0.2),
-        0 0 0 1px rgba(255, 255, 255, 0.3);
-}
-
-.btn.action-btn:active {
-    transform: translateY(1px);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .btn.new-game {
