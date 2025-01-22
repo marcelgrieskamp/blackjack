@@ -140,8 +140,11 @@ h1 {
 }
 
 .bet-controls {
-    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 0.75rem;
+    margin-top: 0.5rem;
 }
 
 .chip {

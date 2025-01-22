@@ -254,4 +254,43 @@ document.addEventListener('DOMContentLoaded', () => {
         messageEl.classList.add('pulse');
         setTimeout(() => messageEl.classList.remove('pulse'), 500);
     }
+
+    function updateResetButtonVisibility() {
+        const resetButton = document.getElementById('reset');
+        const chips = parseInt(document.getElementById('chips').textContent);
+        const currentBet = parseInt(document.getElementById('current-bet').textContent);
+        
+        if (chips === 0 && currentBet === 0) {
+            resetButton.style.display = 'inline-block';
+        } else {
+            resetButton.style.display = 'none';
+        }
+    }
+
+    function updateChips(amount) {
+        const chipsElement = document.getElementById('chips');
+        const currentChips = parseInt(chipsElement.textContent);
+        chipsElement.textContent = currentChips + amount;
+        updateResetButtonVisibility();
+    }
+
+    function placeBet(amount) {
+        const chipsElement = document.getElementById('chips');
+        const currentBetElement = document.getElementById('current-bet');
+        const currentChips = parseInt(chipsElement.textContent);
+        const currentBet = parseInt(currentBetElement.textContent);
+
+        if (amount === 'all-in') {
+            amount = currentChips;
+        }
+
+        if (currentChips >= amount) {
+            chipsElement.textContent = currentChips - amount;
+            currentBetElement.textContent = currentBet + amount;
+            updateResetButtonVisibility();
+        }
+    }
+
+    // Füge den initialen Aufruf hinzu
+    updateResetButtonVisibility();
 }); 
