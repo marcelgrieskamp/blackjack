@@ -98,7 +98,15 @@ h1 {
 .card {
     width: 80px;
     height: 112px;
-    padding: 0.3rem;
+    background: #ffffff;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .message {
@@ -409,22 +417,44 @@ h1 {
     box-shadow: none;
 }
 
-.btn.new-game,
-.btn.hit,
-.btn.stand,
-.btn.place-bet,
-.btn.reset-btn {
+.btn.new-game {
     background: #FFD700;
-    color: #000;
 }
 
-.btn.new-game:disabled,
-.btn.hit:disabled,
-.btn.stand:disabled,
-.btn.place-bet:disabled,
+.btn.new-game:disabled {
+    background: #D1D1D1;
+}
+
+.btn.hit {
+    background: #FFD700;
+}
+
+.btn.hit:disabled {
+    background: #D1D1D1;
+}
+
+.btn.stand {
+    background: #FFD700;
+}
+
+.btn.stand:disabled {
+    background: #D1D1D1;
+}
+
+.btn.place-bet {
+    background: #FFD700;
+}
+
+.btn.place-bet:disabled {
+    background: #D1D1D1;
+}
+
+.btn.reset-btn {
+    background: #FFD700;
+}
+
 .btn.reset-btn:disabled {
     background: #D1D1D1;
-    color: #000;
 }
 
 .bet-btn {
@@ -535,28 +565,4 @@ h1 {
     justify-content: center;
     gap: 1rem;
     margin-top: 1.5rem;
-}
-
-.btn.new-game {
-    background: rgba(0, 176, 155, 0.2);
-}
-
-.btn.new-game:hover {
-    background: rgba(0, 176, 155, 0.3);
-}
-
-.btn.hit {
-    background: rgba(255, 65, 108, 0.2);
-}
-
-.btn.hit:hover {
-    background: rgba(255, 65, 108, 0.3);
-}
-
-.btn.stand {
-    background: rgba(71, 118, 230, 0.2);
-}
-
-.btn.stand:hover {
-    background: rgba(71, 118, 230, 0.3);
 } 
