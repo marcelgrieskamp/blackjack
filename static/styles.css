@@ -250,35 +250,75 @@ h1 {
 
 /* Basis-Farben für die Chips */
 .chip[data-amount="10"] {
-    background: #4a90e2;
+    background: linear-gradient(45deg, #2a6ac1, #4a90e2);
+    background-image: repeating-conic-gradient(
+        from 0deg,
+        #2a6ac1 0deg 20deg,
+        #4a90e2 20deg 40deg
+    );
 }
 
 .chip[data-amount="25"] {
-    background: #50c878;
+    background: linear-gradient(45deg, #2a8c4a, #50c878);
+    background-image: repeating-conic-gradient(
+        from 0deg,
+        #2a8c4a 0deg 20deg,
+        #50c878 20deg 40deg
+    );
 }
 
 .chip[data-amount="50"] {
-    background: #ffd700;
+    background: linear-gradient(45deg, #b39700, #ffd700);
+    background-image: repeating-conic-gradient(
+        from 0deg,
+        #b39700 0deg 20deg,
+        #ffd700 20deg 40deg
+    );
 }
 
 .chip[data-amount="100"] {
-    background: #000000;
+    background: linear-gradient(45deg, #000000, #333333);
+    background-image: repeating-conic-gradient(
+        from 0deg,
+        #000000 0deg 20deg,
+        #333333 20deg 40deg
+    );
 }
 
 .chip[data-amount="200"] {
-    background: #9932cc;
+    background: linear-gradient(45deg, #662299, #9932cc);
+    background-image: repeating-conic-gradient(
+        from 0deg,
+        #662299 0deg 20deg,
+        #9932cc 20deg 40deg
+    );
 }
 
 .chip[data-amount="500"] {
-    background: #ff4500;
+    background: linear-gradient(45deg, #cc3300, #ff4500);
+    background-image: repeating-conic-gradient(
+        from 0deg,
+        #cc3300 0deg 20deg,
+        #ff4500 20deg 40deg
+    );
 }
 
 .chip[data-amount="1000"] {
-    background: #daa520;
+    background: linear-gradient(45deg, #b37700, #daa520);
+    background-image: repeating-conic-gradient(
+        from 0deg,
+        #b37700 0deg 20deg,
+        #daa520 20deg 40deg
+    );
 }
 
 .chip.all-in {
-    background: #ff0000;
+    background: linear-gradient(45deg, #990000, #ff0000);
+    background-image: repeating-conic-gradient(
+        from 0deg,
+        #990000 0deg 20deg,
+        #ff0000 20deg 40deg
+    );
     animation: pulse-strong 2s infinite;
 }
 
