@@ -3,29 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blackjack</title>
+    <title>Casino Blackjack</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <!-- Font Awesome für Casino-Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font für Vegas-Stil -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1 class="glow">Blackjack</h1>
+        <h1 class="casino-title">
+            <i class="fa-solid fa-crown casino-icon"></i>
+            Casino Blackjack
+            <i class="fa-solid fa-crown casino-icon"></i>
+        </h1>
         
         <div class="game-area">
+            <div class="casino-decorations">
+                <i class="fa-solid fa-diamond decoration"></i>
+                <i class="fa-solid fa-spade decoration"></i>
+                <i class="fa-solid fa-heart decoration"></i>
+                <i class="fa-solid fa-club decoration"></i>
+            </div>
+
             <div class="dealer-area">
-                <h2>Dealer's Hand <span id="dealer-score"></span></h2>
+                <h2><i class="fa-solid fa-user-tie"></i> Dealer's Hand <span id="dealer-score"></span></h2>
                 <div id="dealer-cards" class="cards"></div>
             </div>
 
             <div class="player-area">
-                <h2>Your hand <span id="player-score"></span></h2>
+                <h2><i class="fa-solid fa-user"></i> Your hand <span id="player-score"></span></h2>
                 <div id="player-cards" class="cards"></div>
             </div>
 
             <div id="message" class="message"></div>
 
             <div class="betting-area">
-                <p>Guthaben: $<span id="chips" class="chip-count">1000</span></p>
-                <p>Aktueller Einsatz: $<span id="current-bet" class="bet-amount">0</span></p>
+                <p><i class="fa-solid fa-coins"></i> Guthaben: $<span id="chips" class="chip-count">1000</span></p>
+                <p><i class="fa-solid fa-sack-dollar"></i> Aktueller Einsatz: $<span id="current-bet" class="bet-amount">0</span></p>
                 <div class="bet-controls">
                     <div class="chip bet-btn" data-amount="10">
                         <div class="chip-inner">$10</div>
@@ -55,11 +70,18 @@
             </div>
 
             <div class="controls">
-                <button id="new-game" class="btn action-btn new-game">Neues Spiel</button>
-                <button id="place-bet" class="btn action-btn place-bet">Einsatz platzieren</button>
-                <button id="hit" class="btn action-btn hit" disabled>Hit</button>
-                <button id="stand" class="btn action-btn stand" disabled>Stand</button>
-                <button id="reset" class="btn action-btn reset-btn" style="display: none;">Neues Guthaben ($1000)</button>
+                <button id="new-game" class="btn action-btn new-game"><i class="fa-solid fa-dice"></i> Neues Spiel</button>
+                <button id="place-bet" class="btn action-btn place-bet"><i class="fa-solid fa-money-bill-wave"></i> Einsatz platzieren</button>
+                <button id="hit" class="btn action-btn hit" disabled><i class="fa-solid fa-plus"></i> Hit</button>
+                <button id="stand" class="btn action-btn stand" disabled><i class="fa-solid fa-hand"></i> Stand</button>
+                <button id="reset" class="btn action-btn reset-btn" style="display: none;"><i class="fa-solid fa-rotate"></i> Neues Guthaben ($1000)</button>
+            </div>
+            
+            <div class="casino-decorations">
+                <i class="fa-solid fa-diamond decoration"></i>
+                <i class="fa-solid fa-spade decoration"></i>
+                <i class="fa-solid fa-heart decoration"></i>
+                <i class="fa-solid fa-club decoration"></i>
             </div>
         </div>
     </div>

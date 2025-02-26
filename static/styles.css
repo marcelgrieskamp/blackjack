@@ -1,7 +1,38 @@
+/* Casino-Themed Blackjack by Claude */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Additional casino animations */
+@keyframes floating-money {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes neon-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 
+            0 0 5px #ffd700,
+            0 0 10px #ffd700,
+            0 0 20px #ffd700,
+            0 0 40px #ff00de,
+            0 0 80px #ff00de,
+            0 0 90px #ff00de,
+            0 0 100px #ff00de,
+            0 0 150px #ff00de;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+@keyframes spotlight {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
 }
 
 @keyframes glow {
@@ -36,133 +67,594 @@
     100% { background-position: 200px; }
 }
 
+@keyframes casino-lights {
+    0% { box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
+    33% { box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; }
+    66% { box-shadow: 0 0 10px #0000ff, 0 0 20px #0000ff; }
+    100% { box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
+}
+
+/* Casino background and body styling */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #1a472a 0%, #0a1f12 100%);
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230a0a1a"/><path d="M0 10 L100 10" stroke="%23332211" stroke-width="0.5"/><path d="M0 30 L100 30" stroke="%23332211" stroke-width="0.5"/><path d="M0 50 L100 50" stroke="%23332211" stroke-width="0.5"/><path d="M0 70 L100 70" stroke="%23332211" stroke-width="0.5"/><path d="M0 90 L100 90" stroke="%23332211" stroke-width="0.5"/><path d="M10 0 L10 100" stroke="%23332211" stroke-width="0.5"/><path d="M30 0 L30 100" stroke="%23332211" stroke-width="0.5"/><path d="M50 0 L50 100" stroke="%23332211" stroke-width="0.5"/><path d="M70 0 L70 100" stroke="%23332211" stroke-width="0.5"/><path d="M90 0 L90 100" stroke="%23332211" stroke-width="0.5"/></svg>'),
+        linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 100%);
     color: #ffffff;
-    line-height: 1.6;
+    line-height: 1.4;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0.25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Money bill decorations */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: 
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" viewBox="0 0 100 50"><rect width="100" height="50" rx="5" fill="%23004400" stroke="%23006600" stroke-width="2"/><circle cx="20" cy="25" r="10" fill="%23006600" stroke="%23008800" stroke-width="1"/><rect x="40" y="15" width="50" height="20" rx="2" fill="%23003300" stroke="%23005500" stroke-width="1"/></svg>');
+    opacity: 0.1;
+    z-index: -2;
+}
+
+/* Casino lights */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 20%, rgba(0, 255, 0, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 50% 80%, rgba(0, 0, 255, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 10% 60%, rgba(255, 255, 0, 0.1) 0%, transparent 15%),
+        radial-gradient(circle at 90% 90%, rgba(255, 0, 255, 0.1) 0%, transparent 15%);
+    animation: spotlight 8s linear infinite alternate;
+    z-index: -1;
+}
+
+/* Falling money animation */
+.money-bill {
+    position: fixed;
+    width: 60px;
+    height: 30px;
+    background: linear-gradient(to right, #004400, #006600);
+    border-radius: 5px;
+    border: 1px solid #008800;
+    top: -30px;
+    z-index: -1;
+    opacity: 0;
+    animation: floating-money 15s linear infinite;
 }
 
 .container {
     max-width: 1200px;
     width: 100%;
-    margin: 0.25rem auto;
-    padding: 0 1rem;
+    margin: 0.15rem auto;
+    padding: 0 0.5rem;
+    position: relative;
 }
 
+/* Enhanced title styling */
 h1 {
     text-align: center;
     color: #ffd700;
-    margin: 0.25rem 0 0.5rem;
-    font-size: 2.25rem;
+    margin: 0.3rem 0 0.5rem;
+    font-size: 2.5rem;
     font-weight: 800;
     letter-spacing: -0.03em;
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    text-shadow: 
+        0 0 10px #ffd700,
+        0 0 20px #ffd700,
+        0 0 30px #e60073,
+        0 0 40px #e60073,
+        0 0 50px #e60073;
+    animation: neon-flicker 2s infinite alternate;
+    background: linear-gradient(to right, #ffd700, #FFA500, #ffd700);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Vegas style embellishment for title */
+h1::before, h1::after {
+    content: '♦';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #ffd700;
+    text-shadow: 0 0 10px #ffd700, 0 0 20px #e60073;
+}
+
+h1::before {
+    left: 20%;
+}
+
+h1::after {
+    right: 20%;
 }
 
 .game-area {
-    background: linear-gradient(to bottom, rgba(42, 90, 58, 0.95), rgba(26, 71, 42, 0.95));
+    background: linear-gradient(to bottom, rgba(21, 40, 28, 0.95), rgba(13, 35, 21, 0.95)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23104020"/><path d="M0 50 h100 M50 0 v100" stroke="%23206040" stroke-width="0.5"/></svg>');
     backdrop-filter: blur(10px);
-    border-radius: 24px;
-    padding: 1rem;
+    border-radius: 16px;
+    padding: 0.8rem;
     box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
+        0 20px 40px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 0 20px rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    animation: casino-lights 10s infinite;
 }
 
 .dealer-area, .player-area {
     margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
+    padding: 0.6rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
     box-shadow: 
-        inset 0 2px 4px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.05);
+        inset 0 2px 4px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 0 10px rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+/* Vegas-style headings */
+.dealer-area h2, .player-area h2 {
+    color: #ffd700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
 }
 
 .cards {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin: 0.25rem 0;
-    min-height: 115px;
+    margin: 0.3rem 0;
+    min-height: 100px;
     justify-content: center;
-    padding: 0.25rem;
+    padding: 0.3rem;
+    position: relative;
 }
 
+/* Enhanced card look with gold trim */
 .card {
-    width: 80px;
-    height: 112px;
+    width: 70px;
+    height: 98px;
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: 6px;
     position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 215, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+}
+
+.card:hover {
+    transform: translateY(-5px) rotate(2deg);
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 215, 0, 0.5),
+        0 0 15px rgba(255, 215, 0, 0.3);
+    z-index: 1;
 }
 
 .message {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin: 0.5rem 0;
     padding: 0.5rem;
-    border-radius: 16px;
+    border-radius: 12px;
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(8px);
     box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.2),
-        0 0 0 1px rgba(255, 255, 255, 0.05);
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 0 15px rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    height: auto;
+    display: none; /* Standard verbergen */
 }
 
+/* Nur anzeigen, wenn Inhalt vorhanden ist */
+.message:not(:empty) {
+    display: block;
+}
+
+/* Message highlight effect */
+.message::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        transparent, 
+        transparent, 
+        transparent, 
+        rgba(255, 215, 0, 0.1), 
+        transparent, 
+        transparent, 
+        transparent
+    );
+    transform: rotate(30deg);
+    animation: shine 3s infinite linear;
+    pointer-events: none;
+}
+
+/* Vegas-style betting area */
 .betting-area {
     text-align: center;
     margin: 0.5rem 0;
-    padding: 0.75rem;
-    background: rgba(0, 0, 0, 0.25);
+    padding: 0.6rem;
+    background: 
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="20" height="20" fill="%23151515"/><path d="M0 0 L20 20 M20 0 L0 20" stroke="%23222222" stroke-width="0.5"/></svg>');
     backdrop-filter: blur(5px);
     border-radius: 15px;
     box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 15px rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .betting-area p {
     font-size: 1.1rem;
-    margin: 0.25rem 0;
+    margin: 0.3rem 0;
+    color: #ffd700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Highlight chips and betting amounts */
+#chips, #current-bet {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #ffd700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    animation: pulse 2s infinite;
 }
 
 .bet-controls {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+    padding: 0.3rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Enhanced chip design */
 .chip {
-    width: 65px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     position: relative;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
+        0 4px 8px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 0 10px rgba(255, 215, 0, 0.2);
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    transform-style: preserve-3d;
+    perspective: 500px;
 }
 
+.chip:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.2),
+        0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+/* Enhanced controls area */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+    padding: 0.6rem;
+    background: 
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.35)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="20" height="20" fill="%23151515"/><path d="M0 0 L20 20 M20 0 L0 20" stroke="%23222222" stroke-width="0.5"/></svg>');
+    border-radius: 12px;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 0 15px rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+/* Vegas style action buttons */
+.btn {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn.action-btn {
+    background: linear-gradient(to bottom, #ffd700, #b8860b);
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+    position: relative;
+}
+
+.btn.action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.btn.action-btn:hover::before {
+    left: 100%;
+}
+
+.btn.action-btn:hover:not(:disabled) {
+    background: linear-gradient(to bottom, #ffdf00, #daa520);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Customized styles for specific action buttons */
+.btn.new-game {
+    background: linear-gradient(to bottom, #4CAF50, #2E7D32);
+    color: white;
+}
+
+.btn.hit {
+    background: linear-gradient(to bottom, #2196F3, #1565C0);
+    color: white;
+}
+
+.btn.stand {
+    background: linear-gradient(to bottom, #F44336, #C62828);
+    color: white;
+}
+
+.btn.place-bet {
+    background: linear-gradient(to bottom, #ffd700, #b8860b);
+}
+
+.btn.reset-btn {
+    background: linear-gradient(to bottom, #9C27B0, #6A1B9A);
+    color: white;
+}
+
+/* Add money bills to the background */
+@media (min-width: 768px) {
+    body::after {
+        content: '';
+        position: fixed;
+        bottom: -20px;
+        left: 10%;
+        width: 100px;
+        height: 50px;
+        background: linear-gradient(to right, #004400, #006600);
+        border-radius: 5px;
+        border: 1px solid #008800;
+        transform: rotate(-15deg);
+        opacity: 0.2;
+        z-index: -1;
+    }
+    
+    body::before {
+        content: '';
+        position: fixed;
+        top: 20%;
+        right: 5%;
+        width: 100px;
+        height: 50px;
+        background: linear-gradient(to right, #004400, #006600);
+        border-radius: 5px;
+        border: 1px solid #008800;
+        transform: rotate(25deg);
+        opacity: 0.2;
+        z-index: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .game-area {
+        padding: 1.5rem;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .betting-area {
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .bet-controls {
+        gap: 1rem;
+    }
+
+    .controls {
+        gap: 1rem;
+    }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .card {
+        width: 80px;
+        height: 112px;
+        font-size: 1.2rem;
+    }
+
+    .chip {
+        width: 60px;
+        height: 60px;
+    }
+
+    .chip-inner {
+        font-size: 0.8rem;
+    }
+}
+
+.card.hidden {
+    background: linear-gradient(45deg, #b00, #900);
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(0, 0, 0, 0.1) 10px,
+        rgba(0, 0, 0, 0.1) 20px
+    );
+}
+
+.card.hidden .value-top,
+.card.hidden .value-bottom,
+.card.hidden .suit {
+    display: none;
+}
+
+.card.hidden::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Casino title styling with Vegas font */
+.casino-title {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    color: #ffd700;
+    margin: 0.5rem 0 1rem;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-shadow: 
+        0 0 10px #ffd700,
+        0 0 20px #ffd700,
+        0 0 30px #e60073,
+        0 0 40px #e60073,
+        0 0 50px #e60073;
+    animation: neon-flicker 2s infinite alternate;
+    background: linear-gradient(to right, #ffd700, #FFA500, #ffd700);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Casino decorations */
+.casino-decorations {
+    display: flex;
+    justify-content: space-around;
+    margin: 0.4rem 0;
+    opacity: 0.6;
+}
+
+.decoration {
+    font-size: 1.2rem;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    animation: pulse 3s infinite;
+}
+
+.decoration:nth-child(1) { animation-delay: 0s; }
+.decoration:nth-child(2) { animation-delay: 0.75s; }
+.decoration:nth-child(3) { animation-delay: 1.5s; }
+.decoration:nth-child(4) { animation-delay: 2.25s; }
+
+.casino-icon {
+    font-size: 2rem;
+    vertical-align: middle;
+    margin: 0 0.5rem;
+    color: #ffd700;
+    animation: pulse 2s infinite;
+}
+
+/* Restore the chip styling that was accidentally removed */
 .chip::before {
     content: '';
     position: absolute;
@@ -204,7 +696,7 @@ h1 {
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #ffffff;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     position: relative;
@@ -303,35 +795,24 @@ h1 {
     animation: pulse-strong 2s infinite;
 }
 
-.chip:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 
-        0 8px 16px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(255, 255, 255, 0.2);
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
+/* Card styles */
 .card .value-top {
     position: absolute;
-    top: 5px;
-    left: 5px;
-    font-size: 1.2rem;
+    top: 3px;
+    left: 3px;
+    font-size: 1rem;
 }
 
 .card .value-bottom {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
-    font-size: 1.2rem;
+    bottom: 3px;
+    right: 3px;
+    font-size: 1rem;
     transform: rotate(180deg);
 }
 
 .card .suit {
-    font-size: 2rem;
+    font-size: 1.8rem;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -346,226 +827,23 @@ h1 {
     color: #000000;
 }
 
-#chips, #current-bet {
-    color: #ffd700;
-    font-weight: 700;
-    font-size: 1.5rem;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
-.btn {
-    background: #FFD700;
-    color: #000;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    font-weight: 700;
-    font-size: 0.875rem;
-    padding: 0.8rem 1.6rem;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.btn:active:not(:disabled) {
-    transform: translateY(1px);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.btn:disabled {
-    background: #D1D1D1;
-    color: #000;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-.btn.action-btn {
-    background: #FFD700;
-    color: #000;
-    font-weight: 700;
-    padding: 0.8rem 2rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.875rem;
-}
-
-.btn.action-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.btn.action-btn:active:not(:disabled) {
-    transform: translateY(1px);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.btn.action-btn:disabled {
-    background: #D1D1D1;
-    color: #000;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-.btn.new-game {
-    background: #FFD700;
-}
-
-.btn.new-game:disabled {
-    background: #D1D1D1;
-}
-
-.btn.hit {
-    background: #FFD700;
-}
-
-.btn.hit:disabled {
-    background: #D1D1D1;
-}
-
-.btn.stand {
-    background: #FFD700;
-}
-
-.btn.stand:disabled {
-    background: #D1D1D1;
-}
-
-.btn.place-bet {
-    background: #FFD700;
-}
-
-.btn.place-bet:disabled {
-    background: #D1D1D1;
-}
-
-.btn.reset-btn {
-    background: #FFD700;
-}
-
-.btn.reset-btn:disabled {
-    background: #D1D1D1;
-}
-
-.bet-btn {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.chip-count, .bet-amount {
-    display: inline-block;
-    animation: none;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-    
-    .game-area {
-        padding: 1.5rem;
-    }
-    
-    h1 {
-        font-size: 2.5rem;
-        margin: 1.5rem 0;
-    }
-
-    .betting-area {
-        padding: 1.5rem;
-        margin: 2rem 0;
-    }
-
-    .bet-controls {
-        gap: 1rem;
-    }
-
-    .controls {
-        gap: 1rem;
-    }
-
-    .btn {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
-    }
-
-    .card {
-        width: 80px;
-        height: 112px;
-        font-size: 1.2rem;
-    }
-
-    .chip {
-        width: 60px;
-        height: 60px;
-    }
-
-    .chip-inner {
-        font-size: 0.8rem;
-    }
-}
-
+/* Allow hidden cards to retain styling */
 .card.hidden {
-    background: linear-gradient(45deg, #b00, #900);
-    background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(0, 0, 0, 0.1) 10px,
-        rgba(0, 0, 0, 0.1) 20px
-    );
+    background: 
+        linear-gradient(135deg, #a00, #900),
+        repeating-linear-gradient(
+            45deg,
+            transparent 0,
+            transparent 10px,
+            rgba(255, 255, 255, 0.1) 10px,
+            rgba(255, 255, 255, 0.1) 20px
+        );
+    border: 1px solid #700;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .card.hidden .value-top,
 .card.hidden .value-bottom,
 .card.hidden .suit {
     display: none;
-}
-
-.card.hidden::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    height: 80%;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-}
-
-.controls {
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.game-controls {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
 } 

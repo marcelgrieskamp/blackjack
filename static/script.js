@@ -276,4 +276,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Füge den initialen Aufruf hinzu
     updateResetButtonVisibility();
+
+    // Casino effects - add money bills floating in the background
+    function createMoneyBills() {
+        const container = document.querySelector('body');
+        const numBills = 15; // Number of money bills to create
+        
+        for (let i = 0; i < numBills; i++) {
+            const bill = document.createElement('div');
+            bill.classList.add('money-bill');
+            
+            // Random positioning and timing
+            const leftPos = Math.random() * 100;
+            const delay = Math.random() * 10;
+            const duration = 10 + Math.random() * 20;
+            const rotation = Math.random() * 360;
+            const scale = 0.5 + Math.random() * 1;
+            
+            bill.style.left = `${leftPos}%`;
+            bill.style.animationDelay = `${delay}s`;
+            bill.style.animationDuration = `${duration}s`;
+            bill.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+            
+            container.appendChild(bill);
+        }
+    }
+
+    // Call this when the page loads
+    createMoneyBills();
 }); 
